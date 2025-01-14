@@ -1,44 +1,99 @@
 import React, { useState } from "react";
+import WeatherCard from "./components/WeatherCard";
+import ActivityRecommendations from "./components/ActivityRecommendations";
+import { getWeatherData } from "./services/weatherService";
+import "./styles/App.css";
+import MapView from './components/MapView';
 
-const MapImageAPIs = () => {
-  const [location, setLocation] = useState("New York");
+const App = () => {
+  const [location, setLocation] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+  const [coordinates, setCoordinates] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const [hereMapImage, setHereMapImage] = useState("");
-
-  const HERE_API_KEY = process.env.REACT_APP_HERE_API_KEY;
-
- 
-
-  const fetchHereMapImage = async () => {
-    const url = `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${HERE_API_KEY}&c=${location}&z=14&w=400&h=400`;
-    setHereMapImage(url);
+  const fetchData = async () => {
+    if (!location) return;
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const weather = await getWeatherData(location);
+      setWeatherData(weather);
+      setCoordinates(weather.coordinates);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleFetchImages = () => {
-    fetchHereMapImage();
+  const addToFavorites = () => {
+    if (!favorites.includes(location)) {
+      setFavorites([...favorites, location]);
+    }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Map Image API Tester</h1>
-      <input
-        type="text"
-        placeholder="Enter a location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px", width: "300px" }}
-      />
-      <br />
-      <button onClick={handleFetchImages} style={{ padding: "10px 20px", margin: "10px" }}>
-        Fetch Images
-      </button>
+    <div className="app-container">
+      <h1>Weather-Based Travel Planner</h1>
+      
+      <div className="search-section">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Enter a location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <button className="button" onClick={fetchData}>
+          Search Location
+        </button>
+        <button className="button" onClick={addToFavorites}>
+          Add to Favorites
+        </button>
+      </div>
 
-      <div>
-        <h2>HERE Map Image</h2>
-        {hereMapImage ? <img src={hereMapImage} alt="HERE Map" /> : <p>No image available</p>}
+      {error && <div className="error">{error}</div>}
+      
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="content-section">
+          <div className="weather-section">
+            {weatherData && (
+              <>
+                <WeatherCard weatherData={weatherData.current} />
+                <ActivityRecommendations weather={weatherData.current} />
+              </>
+            )}
+          </div>
+          
+          <div className="map-section">
+            <h2>Location Map</h2>
+            <MapView location={location} coordinates={coordinates} />
+          </div>
+        </div>
+      )}
+
+      <div className="favorites-section">
+        <h2>Favorites</h2>
+        {favorites.length > 0 ? (
+          <ul>
+            {favorites.map((fav, index) => (
+              <li key={index} onClick={() => setLocation(fav)} style={{cursor: 'pointer'}}>
+                {fav}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No favorites added yet</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default MapImageAPIs;
+export default App;
