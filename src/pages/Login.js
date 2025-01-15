@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../services/authService';
+import '../styles/Login.css'; // Importing the CSS file
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -18,11 +19,12 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="auth-form">
-      <h2>Login</h2>
+      <h2 className="login-heading">Login</h2>
       {error && <div className="error">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <input
+            className="input-field"
             type="email"
             placeholder="Email"
             value={email}
@@ -32,6 +34,7 @@ const Login = ({ onLogin }) => {
         </div>
         <div>
           <input
+            className="input-field"
             type="password"
             placeholder="Password"
             value={password}
@@ -39,10 +42,10 @@ const Login = ({ onLogin }) => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="submit-btn" type="submit">Login</button>
       </form>
     </div>
   );
 };
 
-export default Login; 
+export default Login;

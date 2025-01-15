@@ -17,20 +17,17 @@ const LandingPage = () => {
   const [travelList, setTravelList] = useState([]);
   const [filteredTravel, setFilteredTravel] = useState([]);
   const [selectedTravel, setSelectedTravel] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [visibleCount, setVisibleCount] = useState(6);
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [forecast, setForecast] = useState(null);
-  const [searchedLocation, setSearchedLocation] = useState("");
-  const [favoritePlaces, setFavoritePlaces] = useState([]);
   const [locationCoordinates, setLocationCoordinates] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTravel = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/travel");
+        const response = await fetch("https://travel-back-end-test.onrender.com/api/travel");
         if (!response.ok) throw new Error("Failed to fetch travel data.");
         const data = await response.json();
         setTravelList(data);
@@ -41,17 +38,6 @@ const LandingPage = () => {
     };
     fetchTravel();
   }, []);
-
-  useEffect(() => {
-    const filtered = travelList.filter((travel) => {
-      const lowerCaseTerm = searchTerm.toLowerCase();
-      return (
-        travel.destination.toLowerCase().includes(lowerCaseTerm) ||
-        travel.description.toLowerCase().includes(lowerCaseTerm)
-      );
-    });
-    setFilteredTravel(filtered);
-  }, [searchTerm, travelList]);
 
   const fetchWeather = async (cityName) => {
     try {
@@ -101,14 +87,8 @@ const LandingPage = () => {
     setVisibleCount((prevCount) => prevCount + 6);
   };
 
-  const handleSearchLocation = () => {
-    fetchWeather(searchedLocation);
-    fetchLocationCoordinates(searchedLocation);
-  };
 
-  const handleAddToFavorites = (place) => {
-    setFavoritePlaces((prev) => [...prev, place]);
-  };
+
 
   return (
     <div className="landing-page">
@@ -169,16 +149,10 @@ const LandingPage = () => {
           <Modal.Title>{selectedTravel?.destination}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h5>Details</h5>
           <p>
             <strong>Description:</strong> {selectedTravel?.description}
           </p>
-          <p>
-            <strong>Contact:</strong> {selectedTravel?.contact}
-          </p>
-          <p>
-            <strong>Email:</strong> {selectedTravel?.email}
-          </p>
+      
 
           {/* Weather Information */}
           <div
@@ -211,22 +185,7 @@ const LandingPage = () => {
             )}
           </div>
 
-          {/* Search Button to find the area */}
-          <div>
-            <Form.Control
-              type="text"
-              placeholder="Search location..."
-              value={searchedLocation}
-              onChange={(e) => setSearchedLocation(e.target.value)}
-            />
-            <Button
-              variant="primary"
-              onClick={handleSearchLocation}
-              style={{ marginTop: "20px" }}
-            >
-              Search
-            </Button>
-          </div>
+        
 
           {/* Map and Activities */}
           <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -241,30 +200,9 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Add to Favorites */}
-          <Button
-            variant="success"
-            onClick={() => handleAddToFavorites(selectedTravel?.destination)}
-            style={{ marginTop: "20px" }}
-          >
-            Add to Favorites
-          </Button>
+          
 
-          {/* Share Buttons */}
-          <div style={{ marginTop: "20px" }}>
-            <FacebookShareButton
-              url={`https://www.example.com/${selectedTravel?.destination}`}
-              quote="Check out this amazing destination!"
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-            <WhatsappShareButton
-              url={`https://www.example.com/${selectedTravel?.destination}`}
-              title="Check out this amazing destination!"
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
-          </div>
+
         </Modal.Body>
       </Modal>
     </div>
