@@ -4,6 +4,10 @@ import ActivityRecommendations from "./components/ActivityRecommendations";
 import { getWeatherData } from "./services/weatherService";
 import "./styles/App.css";
 import MapView from './components/MapView';
+import { getCurrentUser, logout } from './services/authService';
+import { addFavorite, getFavorites, removeFavorite } from './services/favoriteService';
+import Login from './components/Login';
+import Register from './components/Register';
 
 const App = () => {
   const [location, setLocation] = useState("");
@@ -12,6 +16,8 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(getCurrentUser());
+  const [showRegister, setShowRegister] = useState(false);
 
   const fetchData = async () => {
     if (!location) return;
@@ -30,18 +36,69 @@ const App = () => {
     }
   };
 
-  const addToFavorites = () => {
-    if (!favorites.includes(location)) {
-      setFavorites([...favorites, location]);
+  const loadFavorites = async () => {
+    try {
+      const userFavorites = await getFavorites();
+      setFavorites(userFavorites);
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  };
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setUser(null);
+    setFavorites([]);
+  };
+
+  const handleAddToFavorites = async () => {
+    if (!user) {
+      setError('Please login to add favorites');
+      return;
+    }
+
+    try {
+      await addFavorite(location, coordinates);
+      await loadFavorites();
+    } catch (error) {
+      setError(error.response?.data?.error || 'Failed to add favorite');
     }
   };
 
   useEffect(() => {
-  }, [location]);
+    if (user) {
+      loadFavorites();
+    }
+  }, [user]);
+
+  if (!user) {
+    return (
+      <div className="auth-container">
+        {showRegister ? (
+          <Register onRegisterSuccess={() => setShowRegister(false)} />
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
+        <button onClick={() => setShowRegister(!showRegister)}>
+          {showRegister ? 'Switch to Login' : 'Switch to Register'}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
-      <h1>Weather-Based Travel Planner</h1>
+      <div className="header">
+        <h1>Weather-Based Travel Planner</h1>
+        <div className="user-info">
+          <span>Welcome, {user.name}</span>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </div>
       
       <div className="main-content">
         <div className="search-section">
@@ -55,7 +112,7 @@ const App = () => {
           <button className="button" onClick={fetchData}>
             Search Location
           </button>
-          <button className="button" onClick={addToFavorites}>
+          <button className="button" onClick={handleAddToFavorites}>
             Add to Favorites
           </button>
         </div>
@@ -87,9 +144,13 @@ const App = () => {
         <h2>Favorites</h2>
         {favorites.length > 0 ? (
           <ul>
-            {favorites.map((fav, index) => (
-              <li key={index} onClick={() => setLocation(fav)} style={{cursor: 'pointer'}}>
-                {fav}
+            {favorites.map((fav) => (
+              <li 
+                key={fav._id} 
+                onClick={() => setLocation(fav.location)} 
+                style={{cursor: 'pointer'}}
+              >
+                {fav.location}
               </li>
             ))}
           </ul>
