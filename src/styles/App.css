@@ -52,12 +52,12 @@
 
 .travel-details h2 {
   font-size: 1.3rem; /* Increased font size */
-  color: black; // Ensuring all text is black
+  color: black; 
 }
 
 .travel-details p {
   margin: 5px 0;
-  color: black; // Ensuring all text is black
+  color: black; 
 }
 
 .load-more-container {

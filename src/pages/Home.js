@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WeatherCard from "../components/WeatherCard";
 import ActivityRecommendations from "../components/ActivityRecommendations";
 import { getWeatherData } from "../services/weatherService";
-//import "./../styles/App";
+import "../styles/home.css";
 import MapView from '../components/MapView';
 import { getCurrentUser, logout } from '../services/authService';
 import { addFavorite, getFavorites } from '../services/favoriteService';

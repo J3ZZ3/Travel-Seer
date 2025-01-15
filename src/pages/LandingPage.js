@@ -116,12 +116,12 @@ const LandingPage = () => {
         <h1 className="website-name">Bamboo</h1>
         <h1 className="heads">Explore Travel Destinations</h1>
         <Button
-          className="get-started-button"
-          onClick={() => navigate("/get-started")}
-          style={{ position: "absolute", right: "20px", top: "20px" }}
-        >
-          Get Started
-        </Button>
+  className="get-started-button"
+  onClick={() => navigate("/home")} // Changed to "/login"
+  style={{ position: "absolute", right: "20px", top: "20px" }}
+>
+  Get Started
+</Button>
       </div>
 
       {/* Travel Cards */}
