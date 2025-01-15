@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import WeatherCard from "./components/WeatherCard";
-import ActivityRecommendations from "./components/ActivityRecommendations";
-import { getWeatherData } from "./services/weatherService";
-import "./styles/App.css";
-import MapView from './components/MapView';
-import { getCurrentUser, logout } from './services/authService';
-import { addFavorite, getFavorites, removeFavorite } from './services/favoriteService';
-import Login from './components/Login';
-import Register from './components/Register';
+import WeatherCard from "../components/WeatherCard";
+import ActivityRecommendations from "../components/ActivityRecommendations";
+import { getWeatherData } from "../services/weatherService";
+//import "./../styles/App";
+import MapView from '../components/MapView';
+import { getCurrentUser, logout } from '../services/authService';
+import { addFavorite, getFavorites } from '../services/favoriteService';
+import Login from './Login';
+import Register from './Register';
 
 const App = () => {
   const [location, setLocation] = useState("");
