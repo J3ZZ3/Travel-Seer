@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const WEATHER_API_KEY = process.env.REACT_APP_WEATHERAPI_KEY;
+const WEATHER_API_KEY = 'b90b06fece2d43efa8915501251501';
 const BASE_URL = 'https://api.weatherapi.com/v1';
 
 export const getWeatherData = async (location) => {
