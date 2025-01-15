@@ -53,7 +53,7 @@ const ActivityRecommendations = ({ weather }) => {
           `https://api.pexels.com/v1/search?query=${encodeURIComponent(activityQuery)}`,
           {
             headers: {
-              Authorization: 'RsO5Ju0JVUEXoVC3EtsCUzK4UNfB69uyiHNCWm0eX75gxCFe7GX6JxXi' 
+              Authorization: 'your pexels api key' 
             }
           }
         );
