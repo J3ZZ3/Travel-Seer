@@ -33,8 +33,7 @@
 }
 
 .content-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 20px;
 }
 
@@ -48,6 +47,7 @@
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
+  flex: 1;
 }
 
 .favorites-section {
@@ -92,4 +92,30 @@
   margin: 10px 0;
   background-color: #f8d7da;
   border-radius: 4px;
+}
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.suggestions-list {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
 } 

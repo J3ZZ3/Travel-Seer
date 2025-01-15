@@ -35,24 +35,19 @@ const ActivityRecommendations = ({ weather }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
-    const fetchImage = async (activity) => {
-      const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(activity)}`, {
+    const fetchImage = async () => {
+      const response = await fetch('https://api.pexels.com/v1/search?query=hiking', {
         headers: {
-          Authorization: 'RsO5Ju0JVUEXoVC3EtsCUzK4UNfB69uyiHNCWm0eX75gxCFe7GX6JxXi' // Replace with your Pexels API key
+          Authorization: 'your-api-key'
         }
       });
       const data = await response.json();
       if (data.photos && data.photos.length > 0) {
-        setImageUrl(data.photos[0].src.original); // Get the first image
+        setImageUrl(data.photos[0].src.original);
       }
     };
-
-    if (weather) {
-      const recommendations = getRecommendations(weather.conditions);
-      const randomActivity = recommendations[Math.floor(Math.random() * recommendations.length)]; // Select a random activity
-      fetchImage(randomActivity); // Fetch image for the random activity
-    }
-  }, [weather]); // Run effect when weather changes
+    fetchImage();
+  }, []);
 
   if (!weather) return null;
 
