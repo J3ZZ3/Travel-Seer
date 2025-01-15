@@ -49,6 +49,10 @@
 .travel-details {
   padding: 10px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the button horizontally */
+  justify-content: center;
 }
 
 .travel-details h2 {
