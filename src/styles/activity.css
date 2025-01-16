@@ -22,15 +22,39 @@
   }
   
   .recommended-activities-item {
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     margin: 8px 0;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;  /* Align the icon and text horizontally */
+  }
+  
+  .recommended-activities-item svg {
+    margin-right: 10px;  /* Space between icon and text */
+    font-size: 2rem;  /* Increase icon size */
   }
   
   .recommended-activities-item:hover {
     transform: scale(1.05);
+  }
+  
+  /* Icon colors based on weather condition */
+  .activity-icon.hot {
+    color: #f44336;  /* Red for hot activities */
+  }
+  
+  .activity-icon.cold {
+    color: #2196f3;  /* Blue for cold activities */
+  }
+  
+  .activity-icon.rainy {
+    color: #9c27b0;  /* Purple for rainy activities */
+  }
+  
+  .activity-icon.clear {
+    color: #4caf50;  /* Green for clear weather activities */
   }
   
