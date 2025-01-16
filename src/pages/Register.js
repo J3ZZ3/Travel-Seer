@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { register } from '../services/authService';
-
+//import '../styles/Login.css'
 const Register = ({ onRegisterSuccess }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -49,7 +49,8 @@ const Register = ({ onRegisterSuccess }) => {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button className="register-btn" type="submit">Register</button>
+
       </form>
     </div>
   );

@@ -83,7 +83,7 @@ const App = () => {
         ) : (
           <Login onLogin={handleLogin} />
         )}
-        <button onClick={() => setShowRegister(!showRegister)}>
+        <button className='switch-btn' onClick={() => setShowRegister(!showRegister)}>
           {showRegister ? 'Switch to Login' : 'Switch to Register'}
         </button>
       </div>
@@ -95,8 +95,8 @@ const App = () => {
       <div className="header">
         <h1>Weather-Based Travel Planner</h1>
         <div className="user-info">
-          <span>Welcome, {user.name}</span>
-          <button onClick={handleLogout}>Logout</button>
+          <span className='span-note'>Welcome, {user.name}</span>
+          <button className='logout-btn' onClick={handleLogout}>Logout</button>
         </div>
       </div>
       
