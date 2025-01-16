@@ -1,0 +1,36 @@
+.recommended-activities-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .recommended-activities-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .recommended-activities-list {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 1.1rem;
+    color: #495057;
+  }
+  
+  .recommended-activities-item {
+    background-color: #ffffff !important;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    transition: transform 0.2s ease;
+  }
+  
+  .recommended-activities-item:hover {
+    transform: scale(1.05);
+  }
+  

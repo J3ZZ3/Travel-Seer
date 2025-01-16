@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button, Form } from "react-bootstrap";
-import {
-  FacebookShareButton,
-  WhatsappShareButton,
-  FacebookIcon,
-  WhatsappIcon,
-} from "react-share";
-import MapView from "./../components/map/MapView";
+import { Modal, Button, Badge } from "react-bootstrap";
+import { Link } from "react-router-dom"; // Import Link component for navigation
+
 import ActivityRecommendations from "./../components/map/ActivityRecommendations";
 import '../styles/LandStyle.css';
 
@@ -87,39 +82,29 @@ const LandingPage = () => {
     setVisibleCount((prevCount) => prevCount + 6);
   };
 
-
-
-
   return (
     <div className="landing-page">
       <div className="header-container">
-        <h1 className="website-name">Bamboo</h1>
+        <h1 className="website-name">Bambo<Badge bg="success">o</Badge></h1>
         <h1 className="heads">Explore Travel Destinations</h1>
-        <Button
-  className="get-started-button"
-  onClick={() => navigate("/home")} // Changed to "/login"
-  style={{ position: "absolute", right: "20px", top: "20px" }}
->
-  Get Started
-</Button>
+        <Button className="get-started-button" onClick={() => navigate("/home")}>
+          Get Started
+        </Button>
       </div>
 
       {/* Travel Cards */}
       <div className="travel-cards-container">
         {filteredTravel.slice(0, visibleCount).map((travel) => (
           <div key={travel.id} className="travel-card">
-            <img
-              src={travel.photo}
-              alt="Destination"
-              className="travel-image"
-            />
+            <img src={travel.photo} alt="Destination" className="travel-image" />
             <div className="travel-details">
               <h2>{travel.destination}</h2>
-              <p>
+              <p className="desctext">
                 <strong>Description:</strong> {travel.description}
               </p>
               <Button
                 className="purple"
+                bsPrefix="custom-button"
                 onClick={() => handleViewMore(travel)}
               >
                 View More
@@ -139,37 +124,19 @@ const LandingPage = () => {
       )}
 
       {/* Details Modal */}
-      <Modal
-        show={showDetailsModal}
-        onHide={handleCloseDetailsModal}
-        size="lg"
-        scrollable
-      >
+      <Modal show={showDetailsModal} onHide={handleCloseDetailsModal} size="lg" scrollable>
         <Modal.Header closeButton>
           <Modal.Title>{selectedTravel?.destination}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
+          <p className="desctext">
             <strong>Description:</strong> {selectedTravel?.description}
           </p>
-      
 
           {/* Weather Information */}
-          <div
-            style={{
-              padding: "15px",
-              borderRadius: "10px",
-              marginTop: "10px",
-              textAlign: "center",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
+          <div className="weather-display">
             <h5>Weather Information</h5>
-            <p>
-              {weatherInfo
-                ? `${weatherInfo.condition.text}`
-                : "Loading weather..."}
-            </p>
+            <p>{weatherInfo ? `${weatherInfo.condition.text}` : "Loading weather..."}</p>
             {forecast && (
               <div>
                 <p>
@@ -185,24 +152,17 @@ const LandingPage = () => {
             )}
           </div>
 
-        
-
-          {/* Map and Activities */}
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div style={{ width: "60%" }}>
-              <MapView
-                location={selectedTravel?.destination}
-                coordinates={locationCoordinates}
-              />
-            </div>
-            <div style={{ width: "35%", paddingLeft: "20px" }}>
-              <ActivityRecommendations weather={weatherInfo} />
-            </div>
+          {/* Link to See More */}
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+            <Link to="/home" className="see-more-link">
+              See More Destinations
+            </Link>
           </div>
 
-          
-
-
+          {/* Activity Recommendations */}
+          <div style={{ marginTop: "20px" }}>
+            <ActivityRecommendations weather={weatherInfo} />
+          </div>
         </Modal.Body>
       </Modal>
     </div>

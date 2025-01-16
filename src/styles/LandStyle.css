@@ -1,3 +1,4 @@
+/* General Styles */
 .landing-page {
   padding: 20px;
   background-color: #f9f9f9;
@@ -5,9 +6,11 @@
 
 .heads {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: black; /* All text must be black */
+  font-size: 50px; /* Subheading size */
+  font-weight: bold;
+  margin-top: -10px;
+  font-family: 'Dancing Script', cursive;
+  color: whitesmoke;
 }
 
 .search-bar {
@@ -19,21 +22,21 @@
 .travel-cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* Reduced the gap between cards */
+  gap: 1rem;
   justify-content: center;
   padding: 10px;
 }
 
 .travel-card {
-  flex: 0 1 calc(45%); /* Increased card size, two cards per row */
-  max-width: 45%; /* Increased card size */
+  flex: 0 1 calc(45%);
+  max-width: 45%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  margin: 0.5rem; /* Reduce margin to bring cards closer */
+  margin: 0.5rem;
 }
 
 .travel-card:hover {
@@ -42,7 +45,7 @@
 
 .travel-image {
   width: 100%;
-  height: 300px; /* Increased height */
+  height: 300px;
   object-fit: cover;
 }
 
@@ -51,18 +54,18 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the button horizontally */
+  align-items: center;
   justify-content: center;
 }
 
 .travel-details h2 {
-  font-size: 1.5rem; /* Increased font size */
-  color: black; /* Ensuring all text is black */
+  font-size: 1.5rem;
+  color: black;
 }
 
 .travel-details p {
   margin: 5px 0;
-  color: black; /* Ensuring all text is black */
+  color: black;
 }
 
 .load-more-container {
@@ -74,8 +77,8 @@
 .load-more-container .btn {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #8e44ad; /* Purple button */
-  border-color: #8e44ad; /* Purple border */
+  background-color: #8e44ad;
+  border-color: #8e44ad;
 }
 
 .share-buttons {
@@ -89,35 +92,141 @@
 }
 
 .purple {
-  background-color: #8e44ad; /* Purple color */
-  border-color: #8e44ad; /* Purple border */
-  color: white; /* White text */
-  padding: 10px 20px; /* Padding for the button */
-  font-size: 1rem; /* Font size */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: #8e44ad;
+  border-color: #8e44ad;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .purple:hover {
-  background-color: #732d91; /* Darker shade of purple for hover effect */
-  border-color: #732d91; /* Darker shade of purple for hover effect */
+  background-color: #732d91;
+  border-color: #732d91;
 }
 
 .header-container {
-  background-color: #92A5B48C;
-
-  padding: 50px 20px;
-  
+  background: linear-gradient(45deg, #e0c3fc, #8e44ad);
+  padding: 20px;
   border-radius: 8px;
-position: relative;
+  position: relative;
+  min-height: 150px;
+  font-family: 'Poppins', sans-serif;
+  color: #2C3E50;
 }
+
 /* Styling for the website name */
 .website-name {
-  color: black;
+  color: whitesmoke;
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 10px;
+  font-family: 'Dancing Script', cursive;
 }
-.get-started-button{
-  background-color: #732d91;
+
+.get-started-button {
+  background-color: green !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.desctext {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .heads {
+    font-size: 35px; /* Smaller font size for smaller screens */
+  }
+
+  .travel-card {
+    flex: 0 1 calc(100% - 1rem); /* Full width cards on small screens */
+    max-width: 100%;
+  }
+
+  .travel-image {
+    height: 200px; /* Smaller image size */
+  }
+
+  .website-name {
+    font-size: 2.5rem; /* Smaller website name */
+  }
+
+  .get-started-button {
+    font-size: 14px; /* Smaller button text */
+    padding: 8px 16px; /* Smaller padding */
+  }
+
+  .desctext {
+    font-size: 16px; /* Slightly smaller font for description */
+    padding: 8px; /* Slightly smaller padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .heads {
+    font-size: 28px; /* Further reduced font size */
+  }
+
+  .travel-card {
+    flex: 0 1 calc(100% - 1rem); /* Full width cards */
+    max-width: 100%;
+  }
+
+  .travel-image {
+    height: 150px; /* Even smaller image size */
+  }
+
+  .website-name {
+    font-size: 2rem; /* Smaller website name */
+  }
+
+  .get-started-button {
+    font-size: 12px; /* Smaller button text */
+    padding: 6px 12px; /* Smaller padding */
+  }
+
+  .desctext {
+    font-size: 14px; /* Smaller description text */
+    padding: 6px; /* Smaller padding */
+  }
+}
+.weather-display {
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.see-more-link {
+  color: #8e44ad;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.see-more-link:hover {
+  color: #732d91;
+  text-decoration: underline;
 }

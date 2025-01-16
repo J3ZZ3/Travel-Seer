@@ -1,4 +1,5 @@
 import React from "react";
+import '../../styles/activity.css';  // Import the CSS file
 
 const ActivityRecommendations = ({ weather }) => {
   const activitySuggestions = {
@@ -23,11 +24,15 @@ const ActivityRecommendations = ({ weather }) => {
   }
 
   return (
-    <div>
-      <h4>Recommended Activities for This Weather</h4>
-      <ul>
+    <div className="recommended-activities-container">
+      <h4 className="recommended-activities-header">
+        Recommended Activities for This Weather
+      </h4>
+      <ul className="recommended-activities-list">
         {recommendedActivities.map((activity, index) => (
-          <li key={index}>{activity}</li>
+          <li key={index} className="recommended-activities-item">
+            {activity}
+          </li>
         ))}
       </ul>
     </div>
