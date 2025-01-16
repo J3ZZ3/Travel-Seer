@@ -220,13 +220,14 @@
 }
 
 .see-more-link {
-  color: #8e44ad;
+  color: blue;
   font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none;
+  text-decoration: underline
 }
 
 .see-more-link:hover {
   color: #732d91;
-  text-decoration: underline;
+  
 }
